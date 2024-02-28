@@ -66,6 +66,29 @@ document.addEventListener("DOMContentLoaded", function () {
     elementoCarrello.remove();
   }
 
+  function ripristinaCarrello() {
+    const listCarr = document.getElementById("lista-carrello");
+    // Svuota qualsiasi contenuto esistente
+    listCarr.innerHTML = "";
+
+    carrello.forEach((libro) => {
+      const carrElem = document.createElement("li");
+      carrElem.className = "list-group-item d-flex justify-content-between align-items-center my-1 rounded-2 ";
+      carrElem.textContent = `${libro.title} - ${libro.price}€`;
+
+      const btnRemove = document.createElement("button");
+      btnRemove.className = "btn btn-danger btn-sm px-3 py-1";
+      btnRemove.textContent = "Rimuovi";
+      btnRemove.onclick = function () {
+        rimuoviDalCarrello(libro, carrElem);
+      };
+
+      carrElem.appendChild(btnRemove);
+      listCarr.appendChild(carrElem);
+    });
+  }
+  ripristinaCarrello(); // Questa linea va aggiunta
+
   //funzione per creare la card che viene richiamata dal then una volta ricevuto il dato completo
   function creaCard(libro) {
     const col = document.createElement("div"); // creo un div con classe
